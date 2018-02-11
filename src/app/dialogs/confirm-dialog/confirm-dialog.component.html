@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>
+  Confirmation required</h1>
+<div mat-dialog-content>
+  <p>Are you sure?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onYesClick()" color="accent">Yes</button>
+  <button mat-raised-button style="float:right" (click)="onNoClick()"
+    mat-dialog-close color="primary">No</button>
+</div>

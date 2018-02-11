@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Vehicle Type</h1>
+<div mat-dialog-content>
+
+
+  <div style="height:200px">
+    <div class="container">
+      <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="vehicleType.name">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Description" [(ngModel)]="vehicleType.description"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button (click)="save()" mat-dialog-close
+        color="primary">{{isNewRecord?'Insert':'Update'}}</button>
+      <button mat-raised-button (click)="delete()" *ngIf="!isNewRecord"
+        mat-dialog-close color="accent">Delete</button>
+      <button mat-raised-button mat-dialog-close color="primary">Cancel</button>
+    </div>
+  </div>
