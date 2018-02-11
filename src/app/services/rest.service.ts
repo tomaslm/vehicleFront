@@ -9,6 +9,11 @@ import { ProgressBarService } from './progress-bar.service';
 @Injectable()
 export class RestService<T> {
 
+    // res.header("Access-Control-Allow-Origin", "*");
+    // res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
+    // res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+
+
     url = environment.urlAPI;
 
     constructor(private http: HttpClient, private singularResource: string, private pluralResource: string,
@@ -16,11 +21,12 @@ export class RestService<T> {
 
     findAll(filter?: string, sortDirection?: string, sortId?: string, pageIndex?: number, pageSize?: number): Observable<PagedResponse<T>> {
         let httpParams = new HttpParams();
-        httpParams = httpParams.set('filter', '%' + (filter || '') + '%');
-        httpParams = httpParams.set('sortDirection', sortDirection || 'desc');
-        httpParams = httpParams.set('sortId', sortId || 'ID');
-        httpParams = httpParams.set('pageIndex', (pageIndex || 0).toString());
-        httpParams = httpParams.set('pageSize', (pageSize || 100).toString());
+
+        httpParams = httpParams.append('filter', '%' + (filter || '') + '%');
+        httpParams = httpParams.append('sortDirection', sortDirection || 'desc');
+        httpParams = httpParams.append('sortId', sortId || 'ID');
+        httpParams = httpParams.append('pageIndex', (pageIndex || 0).toString());
+        httpParams = httpParams.append('pageSize', (pageSize || 100).toString());
         return this.progresBarService.encapsula(() =>
             this.http.get<PagedResponse<T>>(this.url + this.pluralResource, { params: httpParams }));
     }
