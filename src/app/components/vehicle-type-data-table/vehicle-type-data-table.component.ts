@@ -42,18 +42,18 @@ export class VehicleTypeDataTableComponent implements AfterViewInit, OnInit {
 
     fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
-        debounceTime(150),
-        distinctUntilChanged(),
-        tap(() => {
-          this.paginator.pageIndex = 0;
+      debounceTime(150),
+      distinctUntilChanged(),
+      tap(() => {
+        this.paginator.pageIndex = 0;
 
-          this.loadVehicleTypePage();
-        })
+        this.loadVehicleTypePage();
+      })
       ).subscribe();
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
-        tap(() => this.loadVehicleTypePage())
+      tap(() => this.loadVehicleTypePage())
       ).subscribe();
 
     this.dataSource.loadRegisters('', 'desc', 'ID', 0, this.paginator.pageSize);
@@ -71,7 +71,7 @@ export class VehicleTypeDataTableComponent implements AfterViewInit, OnInit {
 
   create() {
     let dialogRef = this.dialog.open(VehicleTypeDialogComponent, {
-      data: { vehicle: new Vehicle() }
+      data: { vehicleType: new VehicleType() }
     })
     dialogRef.afterClosed().subscribe(res => {
       if (res && res.update) {
